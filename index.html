@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Studenta dzīve | LU Datorika</title>
+  <title>Studenta dzīve</title>
   <meta name="description" content="Maksimālas veiktspējas vienas lapas vietne par Datorikas nodaļas studenta darba nedēļu.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ── TĒMAS UN GLOBĀLIE MAINĪGIE ── */
     :root {
       color-scheme: light;
       --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -48,14 +47,13 @@
       filter: invert(1);
     }
 
-    /* ── BĀZES STILI ── */
     *, *::before, *::after {
       box-sizing: border-box;
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
+      scroll-snap-type: y mandatory; 
     }
 
     body {
@@ -97,7 +95,6 @@
       min-height: 100vh;
     }
 
-    /* ── SĀNU IZVĒLNE ── */
     .sidebar {
       width: var(--sidebar-w);
       height: 100vh;
@@ -176,7 +173,6 @@
       font-weight: 600;
     }
 
-    /* ── TĒMAS SLĒDZIS ── */
     .sidebar-theme {
       margin-top: auto;
       padding-top: 1.5rem;
@@ -225,7 +221,6 @@
       background: #d7e3f6;
     }
 
-    /* ── SATURA KONTEINERS ── */
     .content-wrap {
       margin-left: var(--sidebar-w);
       flex: 1;
@@ -240,10 +235,9 @@
       padding: 0 2rem;
     }
 
-    /* ── KARTĪŠU DIZAINS ── */
     .fullscreen-card {
       scroll-snap-align: start;
-      scroll-snap-stop: normal;
+      scroll-snap-stop: always; 
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -331,7 +325,6 @@
       color: var(--accent-color);
     }
     
-    /* ── JAUNIE SADAĻU VIRSVRAKSTU UN IKONU STILI ── */
     .section-text h2 {
       font-size: clamp(1.6rem, 2.5vw, 2.4rem);
       font-weight: 700;
@@ -339,20 +332,18 @@
       margin: 0 0 1.2rem;
       line-height: 1.2;
       
-      /* Flexbox izkārtojums, lai novietotu ikonu tieši blakus tekstam */
       display: flex;
       align-items: center;
       gap: 0.75rem; 
     }
 
     .section-title-icon {
-      height: clamp(1.8rem, 2.8vw, 2.6rem); /* Dinamiski mērogojas līdzi tekstam */
+      height: clamp(1.8rem, 2.8vw, 2.6rem);
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
     }
 
-    /* Tēmu loģika saraksta ikonām */
     .icon-light-theme { display: inline-block; }
     .icon-dark-theme { display: none; }
 
@@ -366,7 +357,6 @@
       text-align: justify;
     }
 
-    /* AKCENTA KRĀSAS */
     #sakums { --accent-color: #3b82f6; }
     #studijas { --accent-color: #0ea5e9; }
     #darbs { --accent-color: #8b5cf6; }
@@ -397,7 +387,6 @@
     }
     .site-footer p { margin: 0; }
 
-    /* RESPONSIVE DESIGN */
     @media (max-width: 960px) {
       html { scroll-snap-type: none; }
       .workspace { flex-direction: column; }
@@ -451,8 +440,8 @@
     <aside class="sidebar" aria-label="Sadaļu izvēlne">
       <div class="sidebar-brand">
         <div class="brand-images-group">
-          <img src="images/book.png" alt="LU Logotips 1" class="brand-img-asset">
-          <img src="images/binar_code.png" alt="LU Logotips 2" class="brand-img-asset">
+          <img src="images/book.png" alt="Grāmatas ikona" class="brand-img-asset">
+          <img src="images/binar_code.png" alt="Binārā koda ikona" class="brand-img-asset">
         </div>
         <div class="sidebar-brand__text">
           <p class="sidebar-brand__title">Studenta dzīve</p>
@@ -484,24 +473,29 @@
           <div class="card-solid-panel page-hero">
             <h1>Studijas un darbs līdzsvarā</h1>
             <div class="page-hero__visual">
-              <img src="images/sakums.jpg" alt="Studenta ikdienas ritma ilustrācija" loading="lazy" />
+              <img src="images/sakums.png" alt="Latvijas Universitātes studenta apliecība, kas tiek turēta rokā." loading="lazy" />
             </div>
-            <p class="page-hero__text">Strukturēts apskats par vienu darba nedēļu Datorikas nodaļas studenta dzīvē. Ritiniet uz leju, lai pārslēgtu sadaļu kartītes.</p>
           </div>
         </section>
 
         <section id="studijas" class="fullscreen-card">
           <div class="card-solid-panel section-card-grid">
             <div class="section-media">
-              <img src="images/studijas.jpeg" alt="Latvijas Universitātes vide" class="section-media__image" loading="lazy"/>
+              <img src="images/studijas.jpg" alt="Skats uz kodu redaktora VS Code lietotāja saskarni ar atvērtu index.html failu, kurā redzama JavaScript funkcija tēmu pārslēgšanai." class="section-media__image" loading="lazy"/>
             </div>
             <div class="section-text">
               <h2>
-                <img src="images/school_000000.png" alt="" class="section-title-icon icon-light-theme">
-                <img src="images/school_FFFFFF.png" alt="" class="section-title-icon icon-dark-theme">
+                <img src="images/school_000000.png" alt="Studiju ikona" class="section-title-icon icon-light-theme">
+                <img src="images/school_FFFFFF.png" alt="Studiju ikona" class="section-title-icon icon-dark-theme">
                 Studijas
               </h2>
-              <p>Pirmdienas rītā studenta diena visbiežāk sākas ar e-pasta pārbaudi, lekciju sarakstu un e-studiju paziņojumiem. Kamēr dators vēl mostas, tiek salīdzināti pasniedzēju norādījumi, termiņi un kursa materiāli. Daļa uzdevumu atrodas vienuviet, daļa ir noslēpta vairākās platformās, tāpēc svarīgākais ir ātri saprast, kur kas jāmeklē. Šis brīdis man šķiet kā nedēļas koordinācijas centrs: ja rīta digitālais haoss ir sakārtots, pārējā diena rit mierīgāk. Tieši tāpēc svarīgs ir labs ieradums uzreiz pierakstīt darāmos darbus un atzīmēt prioritātes.</p>
+              <p>
+                Esmu 3. kursa students, un studijas aizņem lielu daļu manas ikdienas. Mācību process notiek gan klātienē, gan tiešsaistē, tāpēc man ir jāspēj pielāgoties dažādiem lekciju formātiem. 
+                Tiešsaistes lekcijas ļauj mācīties no jebkuras vietas, kur ir pieejams internets, taču tās prasa lielu pašdisciplīnu un spēju koncentrēties. Savukārt klātienes nodarbības sniedz iespēju labāk komunicēt ar pasniedzējiem un kursabiedriem, kā arī aktīvāk iesaistīties studiju procesā.
+              <br>
+                Studiju laikā regulāri jāizpilda mājasdarbi, laboratorijas darbi un dažādi projekti. Katram kursam ir savi termiņi un prasības, tāpēc svarīgi sekot līdzi uzdevumiem e-studiju vidē. 
+                Neskatoties uz izaicinājumiem, studijas man sniedz jaunas zināšanas un prasmes, kas būs noderīgas nākotnes karjerā.
+              </p>
             </div>
           </div>
         </section>
@@ -510,14 +504,22 @@
           <div class="card-solid-panel section-card-grid section-card-grid--reverse">
             <div class="section-text">
               <h2>
-                <img src="images/work_000000.png" alt="" class="section-title-icon icon-light-theme">
-                <img src="images/work_FFFFFF.png" alt="" class="section-title-icon icon-dark-theme">
+                <img src="images/work_000000.png" alt="Darba ikona" class="section-title-icon icon-light-theme">
+                <img src="images/work_FFFFFF.png" alt="Darba ikona" class="section-title-icon icon-dark-theme">
                 Darbs
               </h2>
-              <p>Otrdienās un trešdienās studenta dzīve bieži sadalās divās daļās: viena daļa notiek klātienē, otra tiešsaistē. Auditorijā ieelpot vidi ir vieglāk, bet tiešsaistes nodarbībās svarīga kļūst disciplīna. Pie datora nākas pārslēgties starp prezentāciju un kodu, savukārt klātienē vairāk jāpievērš uzmanība sarunām un demonstrācijām. Man patīk, ka šāda kombinācija trenē koncentrēšanos dažādās situācijās. Vienlaikus tā atgādina, ka digitālās prasmes nav tikai tehnoloģiju pārzināšana.</p>
+              <p>
+                Papildus studijām es strādāju uzņēmumā Verifone kā praktikants. Šī ir lieliska iespēja iegūt reālu darba pieredzi un iepazīt profesionālu darba vidi vēl studiju laikā. 
+                Man ir pusslodzes darbs, kas ļauj apvienot darba pienākumus ar universitātes prasībām, tomēr cenšos darbam veltīt pēc iespējas vairāk laika, lai ātrāk apgūtu jaunas zināšanas un prasmes.
+              <br>
+                Katra darba diena sniedz iespēju iemācīties kaut ko jaunu, sadarboties ar pieredzējušiem kolēģiem un attīstīt profesionālās iemaņas. 
+                Tā kā esmu praktikants, viens no maniem galvenajiem mērķiem ir uzkrāt pēc iespējas vairāk praktiskās pieredzes un iegūt zināšanas, kuras vēlāk varēšu izmantot savā karjerā.
+              <br>
+                Es uzskatu, ka darbs studiju laikā ir vērtīgs ieguldījums manā profesionālajā attīstībā un nākotnē.
+              </p>
             </div>
             <div class="section-media">
-              <img src="images/darbs.png" alt="Darba vieta ar datoru un pierakstiem" class="section-media__image" loading="lazy"/>
+              <img src="images/darbs.jpg" alt="Skats uz modernu, tukšu biroja telpu ar baltiem galdiem, ziliem nodalījumiem un uz galdiem uzliktiem melniem krēsliem." class="section-media__image" loading="lazy"/>
             </div>
           </div>
         </section>
@@ -525,15 +527,21 @@
         <section id="planosana" class="fullscreen-card">
           <div class="card-solid-panel section-card-grid">
             <div class="section-media">
-              <img src="images/planosana.jpg" alt="Plānošana un laika izjūta" class="section-media__image" loading="lazy"/>
+              <img src="images/planosana.png" alt="Google kalendāra saskarne ar atvērtu 2026. gada jūnija skatu, kurā redzama kreisā sānjosla ar kalendāru sarakstu un "Today" poga." class="section-media__image" loading="lazy"/>
             </div>
             <div class="section-text">
               <h2>
-                <img src="images/calendar_clock_000000.png" alt="" class="section-title-icon icon-light-theme">
-                <img src="images/calendar_clock_FFFFFF.png" alt="" class="section-title-icon icon-dark-theme">
+                <img src="images/calendar_clock_000000.png" alt="Kalendāra ikona" class="section-title-icon icon-light-theme">
+                <img src="images/calendar_clock_FFFFFF.png" alt="Kalendāra ikona" class="section-title-icon icon-dark-theme">
                 Plānošana
               </h2>
-              <p>Pēc nodarbībām studenta diena nav beigusies, jo tieši vakarā sākas patstāvīgais darbs. Tiek pārlasīti pieraksti, salīdzināti piemēri un mēģināts saprast, kurā brīdī kods sāka rīkoties citādi, nekā vajadzēja. Šeit noder lēns, bet precīzs darbs: vispirms saprast uzdevuma mērķi, tad sadalīt to mazākos soļos un tikai pēc tam rakstīt risinājumu. Šī sadaļa manā nedēļā var šķist vismierīgākā tikai no malas, jo tieši šeit dzimst visvairāk atkārtojumu.</p>
+              <p>
+                Lai veiksmīgi apvienotu studijas un darbu, man ir ļoti svarīga laika plānošana. Visus svarīgos datumus es pierakstu kalendārā, lai nepalaistu garām nevienu termiņu. 
+                Tajā atzīmēju, kad jānodod mājasdarbi, laboratorijas darbi un praktiskie uzdevumi, kā arī kontroldarbu un eksāmenu datumus. Tas palīdz man pārskatāmi redzēt gaidāmos pienākumus un savlaicīgi sagatavoties.
+              <br>
+                Kalendārs ir viens no galvenajiem rīkiem, ko izmantoju ikdienā. Regulāri pārbaudu savu grafiku un cenšos ieplānot laiku gan studijām, gan darbam. 
+                Ja redzu, ka tuvojas vairāki termiņi vienlaikus, cenšos uzdevumus sākt pildīt agrāk. Tas ir īpaši svarīgi semestra beigās, kad bieži vien sakrīt projektu nodošanas termiņi, kontroldarbi un gatavošanās eksāmeniem.
+              </p>
             </div>
           </div>
         </section>
@@ -542,14 +550,24 @@
           <div class="card-solid-panel section-card-grid section-card-grid--reverse">
             <div class="section-text">
               <h2>
-                <img src="images/road_000000.png" alt="" class="section-title-icon icon-light-theme">
-                <img src="images/road_FFFFFF.png" alt="" class="section-title-icon icon-dark-theme">
+                <img src="images/road_000000.png" alt="Ceļš ikona" class="section-title-icon icon-light-theme">
+                <img src="images/road_FFFFFF.png" alt="Ceļš ikona" class="section-title-icon icon-dark-theme">
                 Ceļš
               </h2>
-              <p>Ceļš uz universitāti manā nedēļā ir svarīgs pārrāvums starp mājas režīmu un studiju režīmu. Brauciens ar sabiedrisko transportu vai iešana kājām palīdz sakārtot domas, pārskatīt dienas plānu un vēlreiz pārliecināties, ka līdzi ir viss vajadzīgais. Reizēm ceļā tiek pārlasītas piezīmes telefonā, reizēm vienkārši vērots pilsētas ritms un cilvēki. Šie īsie pārsēšanās brīži šķiet mazi, taču tie ļauj mentāli sagatavoties lekcijai vai laboratorijai.</p>
+              <p>
+                Ceļš uz darbu un universitāti ir svarīga manas ikdienas daļa. Es dzīvoju Dārziņos, tāpēc pārvietošanās ar sabiedrisko transportu vien ne vienmēr ir ērta un aizņem daudz laika. 
+                Tieši tāpēc ikdienā izmantoju automašīnu, kas ļauj ātrāk un ērtāk nokļūt vajadzīgajā vietā.
+              <br>
+                Dodoties uz darbu, parasti braucu ar automašīnu, jo tas ir vispraktiskākais un ātrākais pārvietošanās veids. Savukārt, kad jādodas uz universitāti, es braucu ar mašīnu līdz Akropolei, kur to novietoju stāvvietā. 
+                Pēc tam turpinu ceļu ar trolejbusu līdz universitātei. 
+                Šāds maršruts palīdz izvairīties no satiksmes sastrēgumiem pilsētas centrā un atvieglo automašīnas novietošanu.
+              <br>
+                Lai gan ceļš dažkārt aizņem diezgan daudz laika, esmu atradis sev ērtāko pārvietošanās veidu. Dzīvojot tālāk no centra, ir svarīgi rūpīgi plānot izbraukšanas laiku, lai paspētu gan uz lekcijām, gan uz darbu. 
+                Ceļā pavadītais laiks ir kļuvis par neatņemamu manas ikdienas sastāvdaļu, un tas iemāca būt disciplinētam un savlaicīgi organizēt savus dienas plānus.
+              </p>
             </div>
             <div class="section-media">
-              <img src="images/cels.png" alt="Ceļš uz augstskolu transportā" class="section-media__image" loading="lazy"/>
+              <img src="images/cels.jpg" alt="Skats pa automašīnas vējstiklu ziemas laikā, redzams ceļš ar sastrēgumu, luksofors ar sarkano gaismu un sabiedriskais transports." class="section-media__image" loading="lazy"/>
             </div>
           </div>
         </section>
@@ -557,15 +575,26 @@
         <section id="grutibas" class="fullscreen-card final-section">
           <div class="card-solid-panel section-card-grid">
             <div class="section-media">
-              <img src="images/grutibas.jpg" alt="Koncentrēšanās pie datora ekrāna" class="section-media__image" loading="lazy"/>
+              <img src="images/grutibas.jpg" alt="Rokrakstā uz lapas rūtiņās pierakstīti matemātiski apzīmējumi un loģikas uzdevuma risinājums par mašīnu un ievades kopām." class="section-media__image" loading="lazy"/>
             </div>
             <div class="section-text">
               <h2>
-                <img src="images/person_000000.png" alt="" class="section-title-icon icon-light-theme">
-                <img src="images/person_FFFFFF.png" alt="" class="section-title-icon icon-dark-theme">
+                <img src="images/person_000000.png" alt="Cilvēka ikona" class="section-title-icon icon-light-theme">
+                <img src="images/person_FFFFFF.png" alt="Cilvēka ikona" class="section-title-icon icon-dark-theme">
                 Grūtības
               </h2>
-              <p>Studiju nedēļā grūtības parādās ļoti praktiski: kādreiz nepietiek laika, citreiz kāds uzdevums nav līdz galam saprotams, bet reizēm vienkārši uzkrājas nogurums. Tieši tad ir svarīgi apstāties, nevis turpināt strādāt mehāniski. Man palīdz sadalīt problēmu mazākos soļos, pārbaudīt avotus, uzdot jautājumus kursabiedriem vai pasniedzējam un īsi noformulēt, kas tieši nav skaidrs. Kad pirmā barjera ir pārvarēta, pārējais kļūst saprotamāks.</p>
+              <p>
+                Apvienojot studijas ar darbu, man ikdienā rodas vairākas grūtības. 
+                Visbiežāk izaicinājums ir atrast pietiekami daudz laika mājasdarbu izpildei un gatavošanās kontroldarbiem un eksāmeniem, jo darba laikā ne vienmēr ir iespēja tam pievērsties. 
+                Tas nozīmē, ka bieži vien studiju uzdevumi jāveic vakarā vai brīvdienās, kad jau ir nogurums.
+              <br>
+                Papildu grūtības rodas arī tad, kad sakrīt vairāki termiņi vienlaikus — piemēram, laboratorijas darbi, projekti un prezentācijas. 
+                Šādās situācijās ir jāspēj ļoti labi plānot savu laiku, lai visu paspētu izdarīt kvalitatīvi un laikā.
+              <br>
+                Dažkārt ir arī kursi vai tēmas, kur sākumā ir grūti saprast kontekstu, un tad nepieciešams patstāvīgi meklēt papildu informāciju un iedziļināties materiālā. 
+                Tas prasa vairāk laika un pacietības, īpaši tad, ja paralēli ir darba pienākumi. 
+                Tomēr šīs grūtības palīdz attīstīt neatlaidību un spēju pašam atrisināt problēmas.
+              </p>
             </div>
           </div>
 
@@ -584,7 +613,6 @@
     const toggle = document.querySelector('.theme-toggle');
     const navLinks = Array.from(document.querySelectorAll('.sidebar-btn'));
 
-    // ─── THEME MANAGER ───
     const savedTheme = window.localStorage.getItem('theme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
@@ -604,7 +632,6 @@
       window.localStorage.setItem('theme', nextTheme);
     });
 
-    // ─── ACTIVE NAVIGATION LOGIC ───
     function setActiveLink(id) {
       navLinks.forEach((link) => {
         const active = link.getAttribute('href') === id;
@@ -634,7 +661,6 @@
       }
     }, { passive: true });
 
-    // ─── INTERSECTION OBSERVER ───
     const sections = document.querySelectorAll('.fullscreen-card');
     const observerOptions = {
       root: null,
