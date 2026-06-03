@@ -4,47 +4,59 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Līdzsvars | Viena darba nedēļa Datorikas nodaļas studenta dzīvē</title>
-  <meta name="description" content="Vienas lapas vietne par Datorikas nodaļas studenta darba nedēļu ar piecām tematiskām sadaļām un kartīšu ritināšanu.">
+  <title>Līdzsvars | Datorikas studenta dzīve</title>
+  <meta name="description" content="Premium vienas lapas vietne par Datorikas nodaļas studenta darba nedēļu ar kartīšu ritināšanu.">
+  
+  <!-- Modernas Google Fonts saites labākai tipogrāfijai -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    /* ── TĒMAS UN GLOBĀLIE MAINĪGIE ── */
     :root {
       color-scheme: light;
-      --bg: #eef2f7;
-      --surface: rgba(255, 255, 255, 0.92);
+      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      
+      /* Krāsu palete (Gaišā tēma) */
+      --bg: #f4f7fa;
+      --bg-pattern: rgba(16, 32, 51, 0.03);
+      --surface: rgba(255, 255, 255, 0.85);
       --surface-strong: #ffffff;
-      --text: #102033;
-      --muted: #516173;
-      --accent: #1f6f8b;
-      --accent-strong: #14546b;
-      --border: rgba(16, 32, 51, 0.1);
-      --shadow: 0 10px 24px rgba(16, 32, 51, 0.08);
-      --hero-grad-1: #f7fbff;
-      --hero-grad-2: #ffffff;
-      --hero-grad-3: #eef4fb;
-      --sidebar-w: 118px;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: rgba(15, 23, 42, 0.08);
+      --border-glow: rgba(255, 255, 255, 0.6);
+      --shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.02);
+      
+      /* Sānu josla */
+      --sidebar-bg: rgba(255, 255, 255, 0.75);
+      --sidebar-w: 240px;
+      --radius: 20px;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     :root[data-theme="dark"] {
       color-scheme: dark;
-      --bg: #0b1220;
-      --surface: rgba(15, 23, 42, 0.9);
+      /* Krāsu palete (Tumšā tēma) */
+      --bg: #090d16;
+      --bg-pattern: rgba(255, 255, 255, 0.015);
+      --surface: rgba(17, 24, 39, 0.7);
       --surface-strong: #111827;
-      --text: #e5eef9;
-      --muted: #b6c2d4;
-      --accent: #38bdf8;
-      --accent-strong: #0ea5e9;
-      --border: rgba(226, 232, 240, 0.1);
-      --shadow: 0 16px 36px rgba(2, 8, 23, 0.34);
-      --hero-grad-1: #0f172a;
-      --hero-grad-2: #111827;
-      --hero-grad-3: #1f2937;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-glow: rgba(255, 255, 255, 0.03);
+      --shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.02);
+      --sidebar-bg: rgba(11, 17, 30, 0.8);
     }
 
+    /* ── BĀZES STILI ── */
     * {
       box-sizing: border-box;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
-    /* ── SCROLL SNAPPING AKTIVIZĒŠANA VIA WINDOW ── */
     html {
       scroll-behavior: smooth;
       scroll-snap-type: y mandatory;
@@ -52,169 +64,122 @@
 
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--bg);
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--bg-pattern) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
       color: var(--text);
-      line-height: 1.65;
-    }
-
-    img, svg {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      color: var(--accent-strong);
-      text-decoration-thickness: 0.12em;
-      text-underline-offset: 0.14em;
-    }
-
-    a:hover, a:focus-visible {
-      color: var(--accent);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     .skip-link {
       position: absolute;
-      left: 1rem;
-      top: -3rem;
-      padding: 0.75rem 1rem;
+      left: 2rem;
+      top: -5rem;
+      padding: 0.8rem 1.5rem;
       background: var(--surface-strong);
       color: var(--text);
-      border-radius: 999px;
+      border-radius: 12px;
+      font-weight: 600;
       box-shadow: var(--shadow);
-      z-index: 20;
+      z-index: 100;
+      text-decoration: none;
     }
-
-    .skip-link:focus {
-      top: 1rem;
-    }
+    .skip-link:focus { top: 2rem; }
 
     .workspace {
       display: flex;
       min-height: 100vh;
     }
 
-    /* ── Sidebar (Fiksēts kreisajā pusē) ── */
+    /* ── SĀNU IZVĒLNE (SIDEBAR) ── */
     .sidebar {
-      flex-shrink: 0;
       width: var(--sidebar-w);
       height: 100vh;
       position: fixed;
       left: 0;
       top: 0;
       bottom: 0;
-      padding: 1rem 0.65rem 0.8rem;
-      border-right: 1px solid rgba(0, 0, 0, 0.18);
-      background: rgba(238, 238, 238, 0.92);
+      padding: 2rem 1.5rem;
+      background: var(--sidebar-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      overflow-y: auto;
-      z-index: 10;
-    }
-
-    :root[data-theme="dark"] .sidebar {
-      border-right-color: rgba(255, 255, 255, 0.14);
-      background: rgba(18, 22, 31, 0.9);
+      z-index: 50;
     }
 
     .sidebar-brand {
-      display: grid;
-      justify-items: center;
-      gap: 0.5rem;
-      padding-bottom: 0.55rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-    }
-
-    :root[data-theme="dark"] .sidebar-brand {
-      border-bottom-color: rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
     }
 
     .sidebar-brand__icon {
-      width: 3rem;
-      height: 3rem;
-      color: #2f2f2f;
+      width: 2.5rem;
+      height: 2.5rem;
+      color: #3b82f6;
     }
 
-    :root[data-theme="dark"] .sidebar-brand__icon {
-      color: var(--text);
-    }
-
+    .sidebar-brand__text p { margin: 0; }
     .sidebar-brand__count {
-      margin: 0;
-      font-size: 1.2rem;
-      font-weight: 700;
-      line-height: 0.95;
-      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #3b82f6;
     }
-
     .sidebar-brand__title {
-      margin: 0;
-      font-size: 1rem;
-      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 700;
     }
 
     .sidebar-nav {
-      display: grid;
-      gap: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
     }
 
     .sidebar-btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      justify-content: center;
-      min-height: 2.6rem;
-      padding: 0.4rem 0.5rem;
-      border: 1px solid rgba(0, 0, 0, 0.35);
-      border-radius: 0.35rem;
-      background: linear-gradient(#fff, #f1f1f1);
-      color: #1f1f1f;
+      padding: 0.8rem 1rem;
+      color: var(--text-muted);
       text-decoration: none;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-      text-align: center;
-      font-size: 0.9rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      transition: var(--transition);
     }
 
-    .sidebar-btn:hover, .sidebar-btn:focus-visible {
-      background: #eaf2ff;
+    .sidebar-btn:hover {
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.06);
+      transform: translateX(4px);
     }
 
     .sidebar-btn.is-active {
-      background: linear-gradient(#3b82f6, #2563eb);
-      color: #ffffff;
-      border-color: #1d4ed8;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      color: #ffffff !important;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      font-weight: 600;
+      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
     }
 
-    :root[data-theme="dark"] .sidebar-btn {
-      border-color: rgba(255, 255, 255, 0.2);
-      background: linear-gradient(#2d3443, #222838);
-      color: var(--text);
-    }
-
-    :root[data-theme="dark"] .sidebar-btn:hover, :root[data-theme="dark"] .sidebar-btn:focus-visible {
-      background: #32405a;
-    }
-
-    :root[data-theme="dark"] .sidebar-btn.is-active {
-      background: linear-gradient(#4f88d9, #2d67bb);
-      color: #ffffff;
-      border-color: #69a3f0;
-    }
-
+    /* ── ORIĢINĀLAIS TĒMAS SLĒDŽA DIZAINS RETROFIT ── */
     .sidebar-theme {
       margin-top: auto;
-      padding-top: 0.8rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.18);
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
       display: grid;
       grid-template-columns: auto auto auto;
       align-items: center;
       justify-content: center;
-      gap: 0.35rem;
-    }
-
-    :root[data-theme="dark"] .sidebar-theme {
-      border-top-color: rgba(255, 255, 255, 0.14);
+      gap: 0.5rem;
     }
 
     .sidebar-theme__icon {
@@ -254,7 +219,7 @@
       background: #d7e3f6;
     }
 
-    /* ── Saturs un ritināšanas konteiners ── */
+    /* ── SATURA KONTEINERS ── */
     .content-wrap {
       margin-left: var(--sidebar-w);
       flex: 1;
@@ -264,167 +229,193 @@
 
     .main-page {
       width: 100%;
-      max-width: 860px;
+      max-width: 1100px;
       margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    /* ── KARTĪŠU KĀ PILNAS LAPAS NOFORMĒJUMS ── */
+    /* ── PILNEKRĀNA KARTĪŠU DIZAINS ── */
     .fullscreen-card {
       scroll-snap-align: start;
       scroll-snap-stop: always;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 4rem 1.3rem;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+
+    .card-glass-panel {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-top: 1px solid var(--border-glow);
+      border-left: 1px solid var(--border-glow);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 3rem;
+      width: 100%;
+      display: grid;
+      gap: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-glass-panel::before {
+      content: '';
+      position: absolute;
+      top: -150px;
+      right: -150px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
     }
 
     .page-hero {
       text-align: center;
-      max-width: 720px;
     }
-
     .page-hero h1 {
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
       margin: 0 0 1rem;
-      font-size: clamp(2.1rem, 3vw, 3.35rem);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--text), var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-
     .page-hero__visual {
-      margin: 0 auto 1.5rem;
-      width: min(100%, 520px);
+      margin: 2rem auto;
+      max-width: 600px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 4px solid var(--surface-strong);
     }
-
+    .page-hero__visual img { width: 100%; height: auto; display: block; }
     .page-hero__text {
+      font-size: 1.15rem;
+      max-width: 60ch;
       margin: 0 auto;
-      max-width: 50ch;
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
-    .section-card {
-      display: grid;
-      grid-template-columns: minmax(200px, 1fr) minmax(0, 1.45fr);
-      gap: 2rem;
+    .section-card-grid {
+      grid-template-columns: 1.1fr 1.3fr;
       align-items: center;
-      width: 100%;
-      max-width: 720px;
     }
-
-    .section-card--right {
-      grid-template-columns: minmax(0, 1.45fr) minmax(200px, 1fr);
+    .section-card-grid--reverse {
+      grid-template-columns: 1.3fr 1.1fr;
     }
 
     .section-media {
-      border: 1px solid rgba(0, 0, 0, 0.45);
-      border-radius: 6px;
+      position: relative;
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: var(--shadow);
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--border);
     }
-
-    :root[data-theme="dark"] .section-media {
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
     .section-media__image {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
+      transform: scale(1.01);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-glass-panel:hover .section-media__image {
+      transform: scale(1.05);
     }
 
     .section-text {
-      padding: 0 0.4rem;
+      display: flex;
+      flex-direction: column;
     }
-
     .section-kicker {
-      margin-bottom: 0.35rem;
-      font-size: 0.85rem;
-      font-weight: bold;
+      font-size: 0.8rem;
+      font-weight: 700;
       text-transform: uppercase;
-      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin: 0 0 0.5rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-
     .section-text h2 {
-      margin: 0.15rem 0 0.75rem;
-      font-size: clamp(1.4rem, 2.2vw, 2.1rem);
-      line-height: 1.1;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.2rem;
+      line-height: 1.2;
     }
-
     .section-text p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
       margin: 0;
-      color: var(--muted);
+      text-align: justify;
     }
 
-    /* Kopējas tēmu robežas dekorācijai kartīšu iekšienē */
-    .theme-1, .theme-2, .theme-3, .theme-4, .theme-5 {
-      position: relative;
-    }
+    /* SADAĻU KRĀSAS */
+    #studijas { --accent-gradient: linear-gradient(135deg, #0ea5e9, #2563eb); }
+    #darbs { --accent-gradient: linear-gradient(135deg, #8b5cf6, #4f46e5); }
+    #planosana { --accent-gradient: linear-gradient(135deg, #10b981, #059669); }
+    #cels { --accent-gradient: linear-gradient(135deg, #f59e0b, #d97706); }
+    #grutibas { --accent-gradient: linear-gradient(135deg, #ef4444, #dc2626); }
+    #sakums { --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6); }
 
-    .theme-1 { --theme-color: #0ea5e9; }
-    .theme-2 { --theme-color: #8b5cf6; }
-    .theme-3 { --theme-color: #16a34a; }
-    .theme-4 { --theme-color: #f97316; }
-    .theme-5 { --theme-color: #ef4444; }
-
-    /* ── Footeris (Sniegts kā pēdējais elements) ── */
     .site-footer {
       scroll-snap-align: end;
       display: flex;
-      gap: 0.5rem 1.2rem;
       justify-content: space-between;
-      flex-wrap: wrap;
-      padding: 1.5rem 1.3rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.18);
-      color: var(--muted);
-      width: 100%;
-      background: var(--bg);
+      padding: 2rem 0;
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
+    .site-footer p { margin: 0; }
 
-    /* ── Adaptīvais dizains Planšetēm un Telefoniem ── */
-    @media (max-width: 860px) {
-      html {
-        scroll-snap-type: none; /* Izslēdzam agresīvo snap uz maziem ekrāniem labākai vadībai */
-      }
-
-      .workspace {
-        flex-direction: column;
-      }
-
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 960px) {
+      html { scroll-snap-type: none; }
+      .workspace { flex-direction: column; }
       .sidebar {
-        position: sticky;
         width: 100%;
         height: auto;
-        min-height: unset;
-        overflow-y: visible;
+        position: sticky;
+        top: 0;
+        padding: 1rem 1.5rem;
         border-right: 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+        border-bottom: 1px solid var(--border);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
       }
+      .sidebar-brand { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+      .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 0.3rem; }
+      .sidebar-btn { padding: 0.5rem 0.8rem; font-size: 0.85rem; }
+      .sidebar-btn:hover { transform: none; }
+      .sidebar-theme { margin-top: 0; padding-top: 0; border-top: 0; }
 
-      .sidebar-nav {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.55rem;
-      }
-
-      .content-wrap {
-        margin-left: 0;
-      }
-
-      .fullscreen-card {
-        min-height: unset;
-        padding: 3rem 1rem;
-      }
-
-      .section-card, .section-card--right {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
+      .content-wrap { margin-left: 0; }
+      .fullscreen-card { min-height: unset; padding: 2rem 0; }
+      .card-glass-panel { padding: 2rem; gap: 2rem; }
+      .section-card-grid, .section-card-grid--reverse { grid-template-columns: 1fr; }
+      .section-media { aspect-ratio: 16 / 10; order: -1; }
     }
 
-    @media (max-width: 560px) {
-      .sidebar-nav {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    @media (max-width: 640px) {
+      .sidebar { flex-direction: column; gap: 1rem; align-items: stretch; }
+      .sidebar-brand { justify-content: center; }
+      .sidebar-nav { justify-content: center; }
+      .sidebar-theme { justify-content: center; }
+      .main-page { padding: 0 1rem; }
+      .card-glass-panel { padding: 1.5rem; }
+      .site-footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
   </style>
 </head>
@@ -433,24 +424,20 @@
   <a class="skip-link" href="#saturs">Pāriet uz saturu</a>
 
   <div class="workspace">
-    <!-- FIKSĒTĀ NAVIGĀCIJAS JOSLA -->
+    <!-- JOSLA AR ORIĢINĀLO TĒMAS SLĒDZI -->
     <aside class="sidebar" aria-label="Sadaļu izvēlne">
       <div class="sidebar-brand">
-        <div class="sidebar-brand__icon" aria-hidden="true">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="10" y="8" width="30" height="36" rx="4" fill="none" stroke="currentColor" stroke-width="4"/>
-            <path d="M16 17h18M16 24h18M16 31h13" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-            <path d="M14 48h22" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-            <path d="M45 14v10m0 0h10m-10 0v10m0 10v10m0-10h10m-10 0v10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <svg class="sidebar-brand__icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="10" y="8" width="30" height="36" rx="4"/>
+          <path d="M16 18h18M16 26h18M16 34h12M14 50h22"/>
+          <circle cx="48" cy="24" r="6" fill="currentColor"/>
+        </svg>
         <div class="sidebar-brand__text">
-          <p class="sidebar-brand__count">01 10</p>
-          <p class="sidebar-brand__title">Studenta dzīve</p>
+          <p class="sidebar-brand__count">LU Datorika</p>
+          <p class="sidebar-brand__title">Līdzsvars</p>
         </div>
       </div>
 
-      <!-- Saites nomainītas uz enkuriem (#id) -->
       <nav class="sidebar-nav" aria-label="Sadaļu navigācija">
         <a href="#sakums" class="sidebar-btn">Sākums</a>
         <a href="#studijas" class="sidebar-btn">Studijas</a>
@@ -460,6 +447,7 @@
         <a href="#grutibas" class="sidebar-btn">Grūtības</a>
       </nav>
 
+      <!-- Atjaunots precīzs oriģinālais tēmas HTML izkārtojums -->
       <div class="sidebar-theme">
         <span class="sidebar-theme__icon" aria-hidden="true">☼</span>
         <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Ieslēgt tumšo režīmu">
@@ -469,95 +457,98 @@
       </div>
     </aside>
 
-    <!-- GALVENAIS SATURA APGABALS -->
+    <!-- KARTĪŠU APGABALS -->
     <div class="content-wrap">
       <main id="saturs" class="main-page">
         
         <!-- SĀKUMS -->
-        <section id="sakums" class="fullscreen-card page-hero">
-          <h1>Studijas un darbs līdzsvarā</h1>
-          <div class="page-hero__visual" aria-label="Noskaņas ilustrācija ar studenta dienu">
-            <img src="sakums.jpg" alt="Ilustrācija ar studenta nedēļas ritmu" class="page-hero__image"/>
+        <section id="sakums" class="fullscreen-card">
+          <div class="card-glass-panel page-hero">
+            <h1>Studijas un darbs līdzsvarā</h1>
+            <div class="page-hero__visual">
+              <img src="sakums.jpg" alt="Studenta ikdienas ritma ilustrācija"/>
+            </div>
+            <p class="page-hero__text">Strukturēts apskats par vienu darba nedēļu Datorikas nodaļas studenta dzīvē. Ritiniet uz leju, lai pārslēgtu sadaļu kartītes.</p>
           </div>
-          <p class="page-hero__text">Šī ir viena apvienota vietne par Datorikas nodaļas studenta darba nedēļu. Zemāk atradīsi strukturētas sadaļas, kas pārslēdzas kā pilna ekrāna kartītes, nodrošinot ērtu lasīšanu un plūdenu navigāciju.</p>
         </section>
 
         <!-- STUDIJAS -->
         <section id="studijas" class="fullscreen-card">
-          <div class="section-card section-card--left theme-1">
+          <div class="card-glass-panel section-card-grid">
             <div class="section-media">
-              <img src="studijas.jpeg" alt="Latvijas universitāte" class="section-media__image"/>
+              <img src="studijas.jpeg" alt="Latvijas Universitātes vide" class="section-media__image"/>
             </div>
             <div class="section-text">
-              <p class="section-kicker">Studiju ritms</p>
+              <p class="section-kicker">Pirmdiena</p>
               <h2>Pirmdiena sākas ekrānā, nevis pie galda.</h2>
-              <p>Pirmdienas rītā studenta diena visbiežāk sākas ar e-pasta pārbaudi, lekciju sarakstu un e-studiju paziņojumiem. Kamēr dators vēl mostas, tiek salīdzināti pasniedzēju norādījumi, termiņi un kursa materiāli. Daļa uzdevumu atrodas vienuviet, daļa ir noslēpta vairākās platformās, tāpēc svarīgākais ir ātri saprast, kur kas jāmeklē. Šis brīdis man šķiet kā nedēļas koordinācijas centrs: ja rīta digitālais haoss ir sakārtots, pārējā diena rit mierīgāk. Tieši tāpēc svarīgs ir labs ieradums uzreiz pierakstīt darāmos darbus un atzīmēt prioritātes. Praktiskai orientācijai var noderēt arī LU un e-studiju oficiālās vietnes, kur informācija ir pieejama bez liekiem starpposmiem.</p>
+              <p>Pirmdienas rītā studenta diena visbiežāk sākas ar e-pasta pārbaudi, lekciju sarakstu un e-studiju paziņojumiem. Kamēr dators vēl mostas, tiek salīdzināti pasniedzēju norādījumi, termiņi un kursa materiāli. Daļa uzdevumu atrodas vienuviet, daļa ir noslēpta vairākās platformās, tāpēc svarīgākais ir ātri saprast, ukr kas jāmeklē. Šis brīdis man šķiet kā nedēļas koordinācijas centrs: ja rīta digitālais haoss ir sakārtots, pārējā diena rit mierīgāk. Tieši tāpēc svarīgs ir labs ieradums uzreiz pierakstīt darāmos darbus un atzīmēt prioritātes.</p>
             </div>
           </div>
         </section>
 
         <!-- DARBS -->
         <section id="darbs" class="fullscreen-card">
-          <div class="section-card section-card--right theme-2">
+          <div class="card-glass-panel section-card-grid section-card-grid--reverse">
             <div class="section-text">
-                <p class="section-kicker">Darbs un lekcijas</p>
-                <h2>Lekciju diena ir ritms starp auditoriju un tīmekļa kameru.</h2>
-                <p>Otrdienās un trešdienās studenta dzīve bieži sadalās divās daļās: viena daļa notiek klātienē, otra tiešsaistē. Auditorijā ir vieglāk uztvert vidi, pasniedzēja balsi un kolēģu jautājumus, bet tiešsaistes nodarbībās svarīga kļūst disciplīna un spēja nepazust starp ekrāniem. Pie datora nākas pārslēgties starp prezentāciju, kodu un pierakstiem, savukārt klātienē vairāk jāpievērš uzmanība sarunām un demonstrācijām. Man patīk, ka šāda kombinācija trenē koncentrēšanos dažādās situācijās. Vienlaikus tā atgādina, ka digitālās prasmes nav tikai tehnoloģiju pārzināšana, bet arī spēja organizēt uzmanību. Nedēļas vidū visbiežāk kļūst skaidrs, kuri kursi prasa papildu darbu un kuri dod pārliecību par progresu.</p>
+              <p class="section-kicker">Otrdiena & Trešdiena</p>
+              <h2>Ritms starp auditoriju un tīmekļa kameru.</h2>
+              <p>Otrdienās un trešdienās studenta dzīve bieži sadalās divās daļās: viena daļa notiek klātienē, otra tiešsaistē. Auditorijā ir vieglāk uztvert vidi, pasniedzēja balsi un kolēģu jautājumus, bet tiešsaistes nodarbībās svarīga kļūst disciplīna un spēja nepazust starp ekrāniem. Pie datora nākas pārslēgties starp prezentāciju, kodu un pierakstiem, savukārt klātienē vairāk jāpievērš uzmanība sarunām un demonstrācijām. Man patīk, ka šāda kombinācija trenē koncentrēšanos dažādās situācijās. Vienlaikus tā atgādina, ka digitālās prasmes nav tikai tehnoloģiju pārzināšana.</p>
             </div>
             <div class="section-media">
-                <img src="darbs.png" alt="Darba vieta" class="section-media__image"/>
+              <img src="darbs.png" alt="Darba vieta ar datoru un pierakstiem" class="section-media__image"/>
             </div>
           </div>
         </section>
 
         <!-- PLĀNOŠANA -->
         <section id="planosana" class="fullscreen-card">
-          <div class="section-card section-card--left theme-3">
+          <div class="card-glass-panel section-card-grid">
             <div class="section-media">
-                <img src="planosana.jpg" alt="Sienas pulkstenis" class="section-media__image"/>
+              <img src="planosana.jpg" alt="Plānošana un laika izjūta" class="section-media__image"/>
             </div>
             <div class="section-text">
-                <p class="section-kicker">Konspekti un mājasdarbi</p>
-                <h2>Darbs pēc lekcijām sākas tur, kur beidzas slaidi.</h2>
-                <p>Pēc nodarbībām studenta diena nav beigusies, jo tieši vakarā sākas patstāvīgais darbs. Tiek pārlasīti pieraksti, salīdzināti piemēri un mēģināts saprast, kurā brīdī kods sāka rīkoties citādi, nekā vajadzēja. Šeit noder lēns, bet precīzs darbs: vispirms saprast uzdevuma mērķi, tad sadalīt to mazākos soļos un tikai pēc tam rakstīt risinājumu. Dažreiz pietiek ar īsu konspektu, citreiz jāveido vizuāls plāns vai jāstrādā ar vairākām failu versijām. Šī sadaļa manā nedēļā ir vismierīgākā tikai no malas, jo tieši šeit dzimst visvairāk atkārtojumu, kļūdu un labojumu.</p>
+              <p class="section-kicker">Ceturtdiena</p>
+              <h2>Darbs pēc lekcijām sākas tur, kur beidzas slaidi.</h2>
+              <p>Pēc nodarbībām studenta diena nav beigusies, jo tieši vakarā sākas patstāvīgais darbs. Tiek pārlasīti pieraksti, salīdzināti piemēri un mēģināts saprast, kurā brīdī kods sāka rīkoties citādi, nekā vajadzēja. Šeit noder lēns, bet precīzs darbs: vispirms saprast uzdevuma mērķi, tad sadalīt to mazākos soļos un tikai pēc tam rakstīt risinājumu. Dažreiz pietiek ar īsu konspektu, citreiz jāveido vizuāls plāns vai jāstrādā ar vairākām failu versions. Šī sadaļa manā nedēļā ir vismierīgākā tikai no malas, jo tieši šeit dzimst visvairāk atkārtojumu.</p>
             </div>
           </div>
         </section>
 
         <!-- CEĻŠ -->
         <section id="cels" class="fullscreen-card">
-          <div class="section-card section-card--right theme-4">
+          <div class="card-glass-panel section-card-grid section-card-grid--reverse">
             <div class="section-text">
-                <p class="section-kicker">Brauciens uz studijām</p>
-                <h2>Maršruts uz studijām ir neliels pārejas rituāls.</h2>
-                <p>Ceļš uz universitāti manā nedēļā ir svarīgs pārrāvums starp mājas režīmu un studiju režīmu. Brauciens ar sabiedrisko transportu vai iešana kājām palīdz sakārtot domas, pārskatīt dienas plānu un vēlreiz pārliecināties, ka līdzi ir viss vajadzīgais. Reizēm ceļā tiek pārlasītas piezīmes telefonā, reizēm vienkārši vērots pilsētas ritms un cilvēki. Šie īsie pārsēšanās brīži šķiet mazi, taču tie ļauj mentāli sagatavoties lekcijai vai laboratorijai. Ja diena sākusies steigā, tieši ceļš palīdz atgūt līdzsvaru.</p>
+              <p class="section-kicker">Piektdiena</p>
+              <h2>Maršruts uz studijām ir neliels pārejas rituāls.</h2>
+              <p>Ceļš uz universitāti manā nedēļā ir svarīgs pārrāvums starp mājas režīmu un studiju režīmu. Brauciens ar sabiedrisko transportu vai iešana kājām palīdz sakārtot domas, pārskatīt dienas plānu un vēlreiz pārliecināties, ka līdzi ir viss vajadzīgais. Reizēm ceļā tiek pārlasītas piezīmes telefonā, reizēm vienkārši vērots pilsētas ritms un cilvēki. Šie īsie pārsēšanās brīži šķiet mazi, taču tie ļauj mentāli sagatavoties lekcijai vai laboratorijai. Ja diena sākusies steigā, tieši ceļš palīdz atgūt līdzsvaru.</p>
             </div>
             <div class="section-media">
-                <img src="cels.png" alt="Ilustrācija ar ceļu un transportu" class="section-media__image"/>
+              <img src="cels.png" alt="Ceļš uz augstskolu transportā" class="section-media__image"/>
             </div>
           </div>
         </section>
 
         <!-- GRŪTĪBAS -->
         <section id="grutibas" class="fullscreen-card">
-          <div class="section-card section-card--left theme-5">
+          <div class="card-glass-panel section-card-grid">
             <div class="section-media">
-                <img src="grutibas.jpg" alt="Virietis pie datora ar grutibam" class="section-media__image"/>
+              <img src="grutibas.jpg" alt="Koncentrēšanās pie datora ekrāna" class="section-media__image"/>
             </div>
             <div class="section-text">
-                <p class="section-kicker">Grūtības un risinājumi</p>
-                <h2>Ne katra diena rit gludi, un tieši tas māca visvairāk.</h2>
-                <p>Studiju nedēļā grūtības parādās ļoti praktiski: kādreiz nepietiek laika, citreiz kāds uzdevums nav līdz galam saprotams, bet reizēm vienkārši uzkrājas nogurums. Tieši tad ir svarīgi apstāties, nevis turpināt strādāt mehāniski. Man palīdz sadalīt problēmu mazākos soļos, pārbaudīt avotus, uzdot jautājumus kursabiedriem vai pasniedzējam un īsi noformulēt, kas tieši nav skaidrs. Bieži vien pats sarežģītākais brīdis ir sākums, nevis pats uzdevums. Kad pirmā barjera ir pārvarēta, pārējais kļūst saprotamāks. Šī sadaļa atgādina, ka studenta dzīvē grūtības nav neveiksme, bet normāla procesa daļa.</p>
+              <p class="section-kicker">Secinājumi</p>
+              <h2>Ne katra diena rit gludi, un tieši tas māca visvairāk.</h2>
+              <p>Studiju nedēļā grūtības parādās ļoti praktiski: kādreiz nepietiek laika, citreiz kāds uzdevums nav līdz galam saprotams, bet reizēm vienkārši uzkrājas nogurums. Tieši tad ir svarīgi apstāties, nevis turpināt strādāt mehāniski. Man palīdz sadalīt problēmu mazākos soļos, pārbaudīt avotus, uzdot jautājumus kursabiedriem vai pasniedzējam un īsi noformulēt, kas tieši nav skaidrs. Bieži vien pats sarežģītākais brīdis ir sākums, nevis pats uzdevums. Kad pirmā barjera ir pārvarēta, pārējais kļūst saprotamāks.</p>
             </div>
           </div>
         </section>
 
-      </main>
+        <!-- LEJUDAĻA -->
+        <footer class="site-footer">
+          <p>Autors: Pāvels Petrovs</p>
+          <p>Datorikas nodaļa © 2026</p>
+        </footer>
 
-      <footer class="site-footer">
-        <p>Autors: Pāvels Petrovs</p>
-        <p>Darba nosaukums: Studijas un darbs līdzsvarā vienā nedēļā</p>
-      </footer>
+      </main>
     </div>
   </div>
 
@@ -566,7 +557,7 @@
     const toggle = document.querySelector('.theme-toggle');
     const navLinks = Array.from(document.querySelectorAll('.sidebar-btn'));
 
-    // --- Tēmas pārslēgšana ---
+    // --- Atjaunota precīza oriģinālā tēmas loģika ---
     const savedTheme = window.localStorage.getItem('theme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
@@ -586,7 +577,7 @@
       window.localStorage.setItem('theme', nextTheme);
     });
 
-    // --- Aktīvo saišu pārvaldība ---
+    // --- Aktīvo linku automātiskā pārslēgšana ---
     function setActiveLink(hash) {
       navLinks.forEach((link) => {
         const active = link.getAttribute('href') === hash;
@@ -595,11 +586,10 @@
       });
     }
 
-    // --- AUTOMĀTISKA SADAĻU NOTEIKŠANA RITINOT (Intersection Observer) ---
     const sections = document.querySelectorAll('.fullscreen-card');
     const observerOptions = {
       root: null,
-      rootMargin: '-50% 0px -50% 0px', // Aktivizē saiti, kad sadaļa sasniedz ekrāna vidu
+      rootMargin: '-40% 0px -40% 0px',
       threshold: 0
     };
 
@@ -614,11 +604,9 @@
 
     sections.forEach(section => observer.observe(section));
 
-    // Manuāls klikšķis uz navigācijas pogām
     navLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const hash = link.getAttribute('href');
-        setActiveLink(hash);
+      link.addEventListener('click', () => {
+        setActiveLink(link.getAttribute('href'));
       });
     });
   </script>
